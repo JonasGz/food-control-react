@@ -1,0 +1,30 @@
+.container-listfood {
+  height: 100vh;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+}
+
+.list-food {
+  list-style-type: none;
+  width: 70%;
+}
+
+.item-food {
+  padding: 1rem;
+  border: 0.1rem solid rgb(158, 158, 158);
+  width: 100%;
+  margin: 1rem 0 1rem 0;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.food {
+}
+
+.value {
+  opacity: 0.6;
+}

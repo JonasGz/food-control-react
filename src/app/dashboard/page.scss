@@ -1,22 +1,24 @@
-.container-login {
+.container-dashboard {
   height: 100vh;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
   flex-direction: column;
 }
 
-.icon-lock {
-  margin-bottom: 5rem;
+.data {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.cost {
+  text-align: center;
 }
 
 .container-buttons {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.buttons {
-  text-align: center;
-  width: 20rem;
+  flex-direction: row;
+  gap: 2rem;
 }

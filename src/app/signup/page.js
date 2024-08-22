@@ -3,18 +3,18 @@
 import React from "react";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Form, Input, Flex } from "antd";
-import { IoMdLock } from "react-icons/io";
+import { IoPersonAdd } from "react-icons/io5";
 import "./page.scss";
 import Link from "next/link";
 
-export default function Home() {
+export default function SignUpPage() {
   function onFinish(values) {
     console.log(values);
   }
 
   return (
     <div className="container-login">
-      <IoMdLock className="icon-lock" size={110} />
+      <IoPersonAdd className="icon-lock" size={110} />
       <Form
         name="login"
         initialValues={{
@@ -79,12 +79,12 @@ export default function Home() {
               danger
               htmlType="submit"
             >
-              Log in
+              Sign up
             </Button>
             or
-            <Link href="/signup">
+            <Link href="/">
               <Button style={{ height: "3rem" }} block type="primary" danger>
-                Sign up
+                Log in
               </Button>
             </Link>
           </div>
