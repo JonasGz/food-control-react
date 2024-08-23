@@ -1,15 +1,30 @@
 "use client";
 
-import React from "react";
+import { React } from "react";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Form, Input, Flex } from "antd";
 import { IoPersonAdd } from "react-icons/io5";
 import "./page.scss";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useAuth } from "../auth-config/auth-config";
 
 export default function SignUpPage() {
-  function onFinish(values) {
-    console.log(values);
+  const { signUp } = useAuth();
+  const router = useRouter();
+
+  function handleSignUp(values) {
+    const email = values.username;
+    const password = values.password;
+    const emailPattern =
+      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const passwordPattern =
+      /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,16}$/;
+    if (emailPattern.test(email) && passwordPattern.test(password)) {
+      signUp(email, password, router);
+    } else {
+      console.log("Email ou senha inválidos!");
+    }
   }
 
   return (
@@ -26,14 +41,14 @@ export default function SignUpPage() {
           flexDirection: "column",
           alignItems: "center",
         }}
-        onFinish={onFinish}
+        onFinish={handleSignUp}
       >
         <Form.Item
           name="username"
           rules={[
             {
               required: true,
-              message: "Please input your Username!",
+              message: "Please input your Email!",
             },
           ]}
           style={{ width: "80%" }}
@@ -41,7 +56,7 @@ export default function SignUpPage() {
           <Input
             style={{ height: "3rem" }}
             prefix={<UserOutlined />}
-            placeholder="Username"
+            placeholder="Email"
           />
         </Form.Item>
         <Form.Item

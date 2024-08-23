@@ -6,18 +6,20 @@ import { IoIosAdd } from "react-icons/io";
 import { IoMdTrash } from "react-icons/io";
 
 import "./page.scss";
+import { useRouter } from "next/navigation";
 
 export default function AddFoodPage() {
   const [food, setFood] = useState(null);
   const [form] = Form.useForm();
+  const router = useRouter();
 
   function handleClick(data) {
-    console.log(data);
     const id = Math.random();
     const newFood = { ...data, id };
     const existingFood = JSON.parse(localStorage.getItem("food")) || [];
     const updateFood = [...existingFood, newFood];
     localStorage.setItem("food", JSON.stringify(updateFood));
+    router.push("/listfood");
   }
 
   function clearInput() {

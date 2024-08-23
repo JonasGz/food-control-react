@@ -1,15 +1,22 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Form, Input, Flex } from "antd";
 import { IoMdLock } from "react-icons/io";
 import "./page.scss";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useAuth } from "./auth-config/auth-config";
 
 export default function Home() {
-  function onFinish(values) {
-    console.log(values);
+  const { signIn } = useAuth();
+  const router = useRouter();
+
+  function handleSignIn(values) {
+    const email = values.username;
+    const password = values.password;
+    signIn(email, password, router);
   }
 
   return (
@@ -26,14 +33,14 @@ export default function Home() {
           flexDirection: "column",
           alignItems: "center",
         }}
-        onFinish={onFinish}
+        onFinish={handleSignIn}
       >
         <Form.Item
           name="username"
           rules={[
             {
               required: true,
-              message: "Please input your Username!",
+              message: "Please input your Email!",
             },
           ]}
           style={{ width: "80%" }}
@@ -41,7 +48,7 @@ export default function Home() {
           <Input
             style={{ height: "3rem" }}
             prefix={<UserOutlined />}
-            placeholder="Username"
+            placeholder="Email"
           />
         </Form.Item>
         <Form.Item
