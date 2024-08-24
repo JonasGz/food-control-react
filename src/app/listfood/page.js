@@ -24,13 +24,10 @@ export default function ListFoodPage() {
       <ul className="list-food">
         {storage
           ? storage.map((food) => (
-              <li
-                onClick={() => removeFood(food)}
-                className="item-food"
-                key={food.id}
-              >
+              <li className="item-food" key={food.id}>
                 <item className="food">{food.food}</item>
                 <item className="value">R$ {food.value}</item>
+                <button onClick={() => removeFood(food)}>Remover</button>
               </li>
             ))
           : "Carregando"}

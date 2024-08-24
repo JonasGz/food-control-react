@@ -85,7 +85,7 @@ export default function SignUpPage() {
           </Flex>
         </Form.Item>
 
-        <Form.Item className="container-buttons">
+        <Form.Item className="container-buttons-signup">
           <div className="buttons">
             <Button
               style={{ height: "3rem" }}
