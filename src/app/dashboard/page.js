@@ -8,10 +8,12 @@ import { Button } from "antd";
 import { CiEdit } from "react-icons/ci";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { getAuth, signOut } from "firebase/auth";
+import { getAuth } from "firebase/auth";
+import { useAuth } from "../auth-config/auth-config";
 
 export default function DashboardPage() {
   const auth = getAuth();
+  const { logOut } = useAuth();
   const [user, setUser] = useState(null);
   const [limit, setLimit] = useState(null);
   const router = useRouter();
@@ -38,14 +40,7 @@ export default function DashboardPage() {
   }
 
   function handleLogout() {
-    signOut(auth)
-      .then(() => {
-        sessionStorage.removeItem("user");
-        router.push("/");
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    logOut(router);
   }
 
   if (!sessionStorageAuth) {

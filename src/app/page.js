@@ -1,11 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Form, Input, Flex } from "antd";
 import { IoMdLock } from "react-icons/io";
 import "./page.scss";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAuth } from "./auth-config/auth-config";
 
@@ -89,11 +88,17 @@ export default function Home() {
               Log in
             </Button>
             or
-            <Link href="/signup">
-              <Button style={{ height: "3rem" }} block type="primary" danger>
-                Sign up
-              </Button>
-            </Link>
+            <Button
+              style={{ height: "3rem" }}
+              block
+              type="primary"
+              onClick={() => {
+                router.push("/signup");
+              }}
+              danger
+            >
+              Sign up
+            </Button>
           </div>
         </Form.Item>
       </Form>

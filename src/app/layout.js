@@ -1,8 +1,6 @@
-import { Inter } from "next/font/google";
 import "../styles/reset.scss";
 import { AuthProvider } from "./auth-config/auth-config";
-
-const inter = Inter({ subsets: ["latin"] });
+import Navbar from "./components/Navbar";
 
 export const metadata = {
   title: "Food Control",
@@ -11,8 +9,9 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="pt-br">
-      <body className={inter.className}>
+    <html lang="pt-br" suppressHydrationWarning>
+      <body>
+        <Navbar />
         <AuthProvider>{children}</AuthProvider>
       </body>
     </html>

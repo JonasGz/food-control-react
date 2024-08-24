@@ -4,6 +4,7 @@ import {
   createUserWithEmailAndPassword,
   getAuth,
   signInWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
 import React from "react";
 
@@ -34,8 +35,20 @@ export function AuthProvider({ children }) {
       });
   }
 
+  function logOut(router) {
+    const auth = getAuth();
+    signOut(auth)
+      .then(() => {
+        sessionStorage.removeItem("user");
+        router.push("/");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
   return (
-    <AuthContext.Provider value={{ signIn, signUp }}>
+    <AuthContext.Provider value={{ signIn, signUp, logOut }}>
       {children}
     </AuthContext.Provider>
   );
