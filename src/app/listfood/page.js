@@ -1,10 +1,12 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { IoIosRemoveCircle } from "react-icons/io";
 import "./page.scss";
 
 export default function ListFoodPage() {
   const [storage, setStorage] = useState(null);
+  const [value, setValue] = useState(null);
 
   useEffect(() => {
     const storageLocal = JSON.parse(localStorage.getItem("food"));
@@ -12,6 +14,14 @@ export default function ListFoodPage() {
       setStorage(storageLocal);
     }
   }, []);
+
+  useEffect(() => {
+    const storage = localStorage.getItem("food");
+    const obj = JSON.parse(storage);
+    const values = obj.map((item) => parseInt(item.value));
+    const totalValues = values.reduce((acc, valorAtual) => acc + valorAtual, 0);
+    setValue(totalValues);
+  }, [storage]);
 
   function removeFood({ id }) {
     const newStorage = storage.filter((food) => food.id !== id);
@@ -21,13 +31,21 @@ export default function ListFoodPage() {
 
   return (
     <div className="container-listfood">
+      <h1>R$ {value}</h1>
       <ul className="list-food">
         {storage
           ? storage.map((food) => (
               <li className="item-food" key={food.id}>
                 <item className="food">{food.food}</item>
-                <item className="value">R$ {food.value}</item>
-                <button onClick={() => removeFood(food)}>Remover</button>
+                <div className="value-delete">
+                  <item className="value">R$ {food.value}</item>
+
+                  <IoIosRemoveCircle
+                    className="delete"
+                    onClick={() => removeFood(food)}
+                    size={26}
+                  />
+                </div>
               </li>
             ))
           : "Carregando"}

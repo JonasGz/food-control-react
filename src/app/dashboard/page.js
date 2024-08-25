@@ -19,6 +19,11 @@ export default function DashboardPage() {
   const sessionStorageAuth = sessionStorage.getItem("user");
   const [value, setValue] = useState(null);
   const [saldo, setSaldo] = useState(null);
+  const [edit, setEdit] = useState(true);
+
+  if (!sessionStorageAuth) {
+    router.push("/");
+  }
 
   useEffect(() => {
     if (auth.currentUser) {
@@ -33,12 +38,6 @@ export default function DashboardPage() {
     }
   }, [auth.currentUser, localStorageLimit, router]);
 
-  function handleLimit(data) {
-    const value = data.get("limit");
-    localStorage.setItem("limit", value);
-    setLimit(value);
-  }
-
   useEffect(() => {
     const storage = localStorage.getItem("food");
     const obj = JSON.parse(storage);
@@ -49,13 +48,18 @@ export default function DashboardPage() {
 
   useEffect(() => {
     if (limit && auth.currentUser && value) {
-      const resultado = limit - value;
-      setSaldo(resultado);
+      const result = limit - value;
+      setSaldo(result);
     }
   }, [auth.currentUser, limit, value]);
 
-  if (!sessionStorageAuth) {
-    router.push("/");
+  function handleLimit(data) {
+    const value = data.get("limit");
+    if (value) {
+      localStorage.setItem("limit", value);
+      setLimit(value);
+    }
+    setEdit(true);
   }
 
   return (
@@ -65,16 +69,23 @@ export default function DashboardPage() {
         <h1>{user ? `Welcome ${user}!` : "Login não realizado!"}</h1>
         <div className="data">
           <div className="limit">
-            {limit ? (
+            <p style={{ fontWeight: "bold", textAlign: "center" }}>LIMITE</p>
+            {edit ? (
               <div className="container-limit">
                 <span>R$ {limit}</span>
-                <button className="limit-button" onClick={() => setLimit(null)}>
-                  <CiEdit size={26} />
+                <button className="limit-button" onClick={() => setEdit(false)}>
+                  <CiEdit size={20} />
                 </button>
               </div>
             ) : (
               <form className="form-limit" action={handleLimit}>
-                <input className="limit-input" name="limit" type="number" />
+                <input
+                  placeholder={limit}
+                  className="limit-input"
+                  name="limit"
+                  type="number"
+                  style={{ padding: "0.8rem" }}
+                />
                 <button className="limit-button" type="submit">
                   OK
                 </button>
