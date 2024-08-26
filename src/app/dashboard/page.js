@@ -15,7 +15,7 @@ export default function DashboardPage() {
   const [user, setUser] = useState(null);
   const [limit, setLimit] = useState(null);
   const router = useRouter();
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState(0);
   const [saldo, setSaldo] = useState(null);
   const [edit, setEdit] = useState(true);
 
@@ -45,10 +45,15 @@ export default function DashboardPage() {
 
   useEffect(() => {
     const storage = localStorage.getItem("food");
-    const obj = JSON.parse(storage);
-    const values = obj.map((item) => parseInt(item.value));
-    const totalValues = values.reduce((acc, valorAtual) => acc + valorAtual, 0);
-    setValue(totalValues);
+    if (storage) {
+      const obj = JSON.parse(storage);
+      const values = obj.map((item) => parseInt(item.value));
+      const totalValues = values.reduce(
+        (acc, valorAtual) => acc + valorAtual,
+        0
+      );
+      setValue(totalValues);
+    }
   }, [value]);
 
   useEffect(() => {
