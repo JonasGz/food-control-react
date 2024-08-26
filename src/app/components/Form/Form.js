@@ -84,6 +84,9 @@ const Form = ({ router, type }) => {
           <button type="submit" className="container-form__button">
             Log in
           </button>
+          <span style={{ fontSize: "0.8rem", textAlign: "center" }}>
+            Not account?
+          </span>
           <button
             onClick={() => router.push("/signup")}
             type="button"
