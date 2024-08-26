@@ -10,25 +10,34 @@ export default function ListFoodPage() {
   const router = useRouter();
 
   useEffect(() => {
-    const sessionStorageAuth = sessionStorage.getItem("user");
-    if (!sessionStorageAuth) {
-      router.push("/");
+    if (typeof window !== "undefined") {
+      const sessionStorageAuth = sessionStorage.getItem("user");
+      if (!sessionStorageAuth) {
+        router.push("/");
+      }
     }
   }, [router]);
 
   useEffect(() => {
-    const storageLocal = JSON.parse(localStorage.getItem("food"));
-    if (storageLocal) {
-      setStorage(storageLocal);
+    if (typeof window !== "undefined") {
+      const storageLocal = JSON.parse(localStorage.getItem("food"));
+      if (storageLocal) {
+        setStorage(storageLocal);
+      }
     }
   }, []);
 
   useEffect(() => {
-    const storage = localStorage.getItem("food");
-    const obj = JSON.parse(storage);
-    const values = obj.map((item) => parseInt(item.value));
-    const totalValues = values.reduce((acc, valorAtual) => acc + valorAtual, 0);
-    setValue(totalValues);
+    if (typeof window !== "undefined") {
+      const storage = localStorage.getItem("food");
+      const obj = JSON.parse(storage);
+      const values = obj.map((item) => parseInt(item.value));
+      const totalValues = values.reduce(
+        (acc, valorAtual) => acc + valorAtual,
+        0
+      );
+      setValue(totalValues);
+    }
   }, [storage]);
 
   function removeFood({ id }) {

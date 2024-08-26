@@ -20,9 +20,11 @@ export default function DashboardPage() {
   const [edit, setEdit] = useState(true);
 
   useEffect(() => {
-    const sessionStorageAuth = sessionStorage.getItem("user");
-    if (!sessionStorageAuth) {
-      router.push("/");
+    if (typeof window !== "undefined") {
+      const sessionStorageAuth = sessionStorage.getItem("user");
+      if (!sessionStorageAuth) {
+        router.push("/");
+      }
     }
   }, [router]);
 

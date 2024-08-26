@@ -13,9 +13,11 @@ export default function AddFoodPage() {
   const [form] = Form.useForm();
 
   useEffect(() => {
-    const sessionStorageAuth = sessionStorage.getItem("user");
-    if (!sessionStorageAuth) {
-      router.push("/");
+    if (typeof window !== "undefined") {
+      const sessionStorageAuth = sessionStorage.getItem("user");
+      if (!sessionStorageAuth) {
+        router.push("/");
+      }
     }
   }, [router]);
 
