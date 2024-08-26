@@ -1,0 +1,98 @@
+.container-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 80%;
+  max-width: 22.5rem;
+
+  &__inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  &__input {
+    padding: 0.6rem;
+    border-radius: 0.6rem;
+    border: none;
+    outline: 0.1rem solid #c2c2c2;
+    transition: ease-in-out 0.3s;
+  }
+
+  &__input:focus {
+    outline: 0.1rem solid #ff8a8a;
+  }
+
+  &__input:hover {
+    outline: 0.1rem solid #ff8a8a;
+  }
+
+  &__input-password {
+    padding: 0.6rem;
+    border-top-left-radius: 0.6rem;
+    border-bottom-left-radius: 0.6rem;
+
+    border: none;
+    outline: 0.1rem solid #c2c2c2;
+    transition: ease-in-out 0.3s;
+  }
+
+  &__input-password:focus {
+    outline: 0.1rem solid #ff8a8a;
+  }
+
+  &__input-password:hover {
+    outline: 0.1rem solid #ff8a8a;
+  }
+
+  &__password {
+    display: grid;
+    grid-template-columns: 1fr 2rem;
+    align-items: center;
+  }
+
+  &__eye-password {
+    width: 100%;
+    background-color: #dadada;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: 0.1rem solid #c2c2c2;
+    cursor: pointer;
+    transition: ease-in-out 0.3s;
+  }
+
+  &__eye-password:hover {
+    opacity: 0.8;
+    outline: 0.1rem solid #ff8a8a;
+  }
+
+  &__buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0 1rem 0 1rem;
+  }
+
+  &__button {
+    border: none;
+    border-radius: 0.6rem;
+    color: #fff;
+    background-color: #e52323;
+    padding: 0.8rem;
+    font-size: small;
+    transition: ease-in-out 0.3s;
+    cursor: pointer;
+  }
+
+  &__button--disabled {
+    background-color: white;
+    color: #000;
+    outline: 0.1rem solid #c2c2c2;
+  }
+
+  &__button:hover {
+    opacity: 0.8;
+  }
+}
