@@ -27,7 +27,7 @@ export default function Home() {
           remember: true,
         }}
         style={{
-          width: "70%",
+          width: "100%",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
