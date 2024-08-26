@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { GiHamburger } from "react-icons/gi";
 import { Button, Form, Input } from "antd";
 import { IoIosAdd } from "react-icons/io";
@@ -10,12 +10,14 @@ import { useRouter } from "next/navigation";
 
 export default function AddFoodPage() {
   const router = useRouter();
-  const sessionStorageAuth = sessionStorage.getItem("user");
   const [form] = Form.useForm();
 
-  if (!sessionStorageAuth) {
-    router.push("/");
-  }
+  useEffect(() => {
+    const sessionStorageAuth = sessionStorage.getItem("user");
+    if (!sessionStorageAuth) {
+      router.push("/");
+    }
+  }, [router]);
 
   function handleClick(data) {
     const id = Math.random();

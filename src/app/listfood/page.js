@@ -7,6 +7,14 @@ import "./page.scss";
 export default function ListFoodPage() {
   const [storage, setStorage] = useState(null);
   const [value, setValue] = useState(null);
+  const router = useRouter();
+
+  useEffect(() => {
+    const sessionStorageAuth = sessionStorage.getItem("user");
+    if (!sessionStorageAuth) {
+      router.push("/");
+    }
+  }, [router]);
 
   useEffect(() => {
     const storageLocal = JSON.parse(localStorage.getItem("food"));

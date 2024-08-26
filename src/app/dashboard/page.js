@@ -15,17 +15,20 @@ export default function DashboardPage() {
   const [user, setUser] = useState(null);
   const [limit, setLimit] = useState(null);
   const router = useRouter();
-  const localStorageLimit = localStorage.getItem("limit");
-  const sessionStorageAuth = sessionStorage.getItem("user");
   const [value, setValue] = useState(null);
   const [saldo, setSaldo] = useState(null);
   const [edit, setEdit] = useState(true);
 
-  if (!sessionStorageAuth) {
-    router.push("/");
-  }
+  useEffect(() => {
+    const sessionStorageAuth = sessionStorage.getItem("user");
+    if (!sessionStorageAuth) {
+      router.push("/");
+    }
+  }, [router]);
 
   useEffect(() => {
+    const localStorageLimit = localStorage.getItem("limit");
+
     if (auth.currentUser) {
       const emailReceived =
         auth.currentUser.email.charAt(0).toUpperCase() +
@@ -36,7 +39,7 @@ export default function DashboardPage() {
     if (localStorageLimit) {
       setLimit(localStorageLimit);
     }
-  }, [auth.currentUser, localStorageLimit, router]);
+  }, [auth.currentUser, router]);
 
   useEffect(() => {
     const storage = localStorage.getItem("food");
