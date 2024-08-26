@@ -1,21 +1,7 @@
-.container-login {
+.container {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-}
-
-.icon-lock {
-  margin-bottom: 2rem;
-}
-
-.container-buttons {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.buttons {
-  text-align: center;
-  width: 20rem;
+  gap: 2rem;
 }
