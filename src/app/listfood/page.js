@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { IoIosRemoveCircle } from "react-icons/io";
+import { useRouter } from "next/navigation";
 import "./page.scss";
 
 export default function ListFoodPage() {
