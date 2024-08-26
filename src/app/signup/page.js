@@ -76,7 +76,7 @@ export default function SignUpPage() {
             style={{ height: "3rem" }}
           />
         </Form.Item>
-        <Form.Item>
+        <Form.Item style={{ display: "none" }}>
           <Flex justify="space-between" align="center">
             <Form.Item name="remember" valuePropName="checked" noStyle>
               <Checkbox>Remember me</Checkbox>
