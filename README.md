@@ -1,5 +1,3 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
 # Controle de Gastos com Lanches
 
 Este é um aplicativo desenvolvido para ajudar a controlar os gastos com lanches, permitindo o registro e visualização de compras realizadas. O projeto foi construído utilizando React.js, Next.js e Google Firebase.
