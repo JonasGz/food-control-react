@@ -7,14 +7,20 @@
 
 .list-food {
   list-style-type: none;
-  width: 70%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1rem 0 1rem;
+  flex-direction: column;
+  cursor: pointer;
 }
 
 .item-food {
   padding: 1rem;
   border: 0.1rem solid rgb(158, 158, 158);
   width: 100%;
-  margin: 1rem 0 1rem 0;
+  margin: 0.2rem 0 0.2rem 0;
   border-radius: 1rem;
   display: flex;
   flex-direction: row;
