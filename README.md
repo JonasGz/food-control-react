@@ -7,7 +7,7 @@ Este é um aplicativo desenvolvido para ajudar a controlar os gastos com lanches
 - Registro de Lanches: Adicione novos lanches ao sistema com nome e valor.
 - Listagem de Lanches: Veja uma lista de todos os lanches registrados.
 - Autenticação: Sign Up e Sign In com autenticação via Google Firebase.
-- Relatório: Relatório de gastos em tempo real, com ajuste de limite de gasto.You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- Relatório: Relatório de gastos em tempo real, com ajuste de limite de gastos.
 
 ## Tecnologias Utilizadas
 - React.js: Biblioteca JavaScript para construção da interface do usuário.
