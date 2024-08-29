@@ -1,8 +1,8 @@
 "use client";
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import "./index.scss";
 import { useRouter } from "next/navigation";
-import { getAuth } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { RiLogoutBoxLine } from "react-icons/ri";
 import { useAuth } from "@/app/auth-config/auth-config";
 import { Transition } from "../Transition/Transition";
@@ -10,12 +10,21 @@ import { Transition } from "../Transition/Transition";
 function HamburgerMenu() {
   const auth = getAuth();
   const { logOut } = useAuth();
-
   const [isOpen, setIsOpen] = useState(false);
-
+  const [user, setUser] = useState(null);
   const toggleMenu = () => setIsOpen(!isOpen);
-
   const router = useRouter();
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      if (auth.currentUser) {
+        setUser(currentUser);
+      } else {
+        setUser(null);
+      }
+    });
+    return () => unsubscribe();
+  }, [auth]);
 
   function handleLogout() {
     logOut(router);
@@ -37,7 +46,7 @@ function HamburgerMenu() {
             <RiLogoutBoxLine size={20} />
           </button>
         </div>
-        {!auth.currentUser ? (
+        {!user ? (
           <ul>
             <li>
               <Transition href="/">Home</Transition>
