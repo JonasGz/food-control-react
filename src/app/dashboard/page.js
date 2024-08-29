@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { ProtectPage } from "../components/ProtectPage/ProtectPage";
 import { Loading } from "../components/Loading/Loading";
+import { Transition } from "../components/Transition/Transition";
 
 export default function DashboardPage() {
   const auth = getAuth();
@@ -128,24 +129,26 @@ export default function DashboardPage() {
           </div>
         </div>
         <div className="container-buttons">
-          <Button
-            type="primary"
-            size="large"
-            style={{ width: "4rem", height: "4rem" }}
-            onClick={() => router.push("/addfood")}
-            danger
-          >
-            <IoIosAdd size={42} />
-          </Button>
-          <Button
-            type="primary"
-            size="large"
-            style={{ width: "4rem", height: "4rem" }}
-            onClick={() => router.push("/listfood")}
-            danger
-          >
-            <FaList size={26} />
-          </Button>
+          <Transition href="/addfood">
+            <Button
+              type="primary"
+              size="large"
+              style={{ width: "4rem", height: "4rem" }}
+              danger
+            >
+              <IoIosAdd size={42} />
+            </Button>
+          </Transition>
+          <Transition href="/listfood">
+            <Button
+              type="primary"
+              size="large"
+              style={{ width: "4rem", height: "4rem" }}
+              danger
+            >
+              <FaList size={26} />
+            </Button>
+          </Transition>
         </div>
       </div>
     </>

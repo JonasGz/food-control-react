@@ -7,17 +7,19 @@ import {
   signOut,
 } from "firebase/auth";
 import React from "react";
+import transitionAction from "../utils/transitionAction/transitionAction";
 
 const AuthContext = React.createContext();
+const auth = getAuth();
 
 export function AuthProvider({ children }) {
-  const auth = getAuth();
   function signIn(email, password, router) {
-    const auth = getAuth();
+    transitionAction("start");
     signInWithEmailAndPassword(auth, email, password)
       .then(() => {
         sessionStorage.setItem("user", true);
         router.push("/dashboard");
+        transitionAction("end");
       })
       .catch((error) => {
         console.log(error.message);
@@ -25,11 +27,12 @@ export function AuthProvider({ children }) {
   }
 
   function signUp(email, password, router) {
-    const auth = getAuth();
+    transitionAction("start");
     createUserWithEmailAndPassword(auth, email, password)
       .then(() => {
         sessionStorage.setItem("user", true);
         router.push("/dashboard");
+        transitionAction("end");
       })
       .catch((error) => {
         console.log(error.message);
@@ -37,11 +40,12 @@ export function AuthProvider({ children }) {
   }
 
   function logOut(router) {
-    const auth = getAuth();
+    transitionAction("start");
     signOut(auth)
       .then(() => {
         sessionStorage.removeItem("user");
         router.push("/");
+        transitionAction("end");
       })
       .catch((error) => {
         console.error(error);
