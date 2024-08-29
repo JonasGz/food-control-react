@@ -1,23 +1,31 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import { IoIosRemoveCircle } from "react-icons/io";
-import { useRouter } from "next/navigation";
+import { ProtectPage } from "../components/ProtectPage/ProtectPage";
 import "./page.scss";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { Loading } from "../components/Loading/Loading";
 
 export default function ListFoodPage() {
   const [storage, setStorage] = useState(null);
   const [value, setValue] = useState(null);
-  const router = useRouter();
+  const auth = getAuth();
+  const [user, setUser] = useState(auth.currentUser);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const sessionStorageAuth = sessionStorage.getItem("user");
-      if (!sessionStorageAuth) {
-        router.push("/");
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      if (auth.currentUser) {
+        setUser(currentUser);
+        setLoading(false);
+      } else {
+        setUser(null);
+        setLoading(false);
       }
-    }
-  }, [router]);
+    });
+    return () => unsubscribe();
+  }, [auth]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -29,22 +37,25 @@ export default function ListFoodPage() {
   }, []);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const storage = localStorage.getItem("food");
-      const obj = JSON.parse(storage);
-      const values = obj.map((item) => parseInt(item.value));
-      const totalValues = values.reduce(
-        (acc, valorAtual) => acc + valorAtual,
-        0
-      );
-      setValue(totalValues);
-    }
+    const storage = localStorage.getItem("food");
+    const obj = JSON.parse(storage);
+    const values = obj.map((item) => parseInt(item.value));
+    const totalValues = values.reduce((acc, valorAtual) => acc + valorAtual, 0);
+    setValue(totalValues);
   }, [storage]);
 
   function removeFood({ id }) {
     const newStorage = storage.filter((food) => food.id !== id);
     setStorage(newStorage);
     localStorage.setItem("food", JSON.stringify(newStorage));
+  }
+
+  if (loading) {
+    return <Loading />;
+  }
+
+  if (!user) {
+    return <ProtectPage />;
   }
 
   return (
