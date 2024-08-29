@@ -21,6 +21,18 @@
   grid-template-rows: auto 1fr;
   height: 100dvh;
 }
+
+/* Transition */
+
+.page-transition {
+  opacity: 0;
+  background-color: black;
+  transform: translateY(40px);
+  filter: blur(12px);
+}
+
+/* end Transition */
+
 /*
     Typographic tweaks!
     3. Add accessible line-height
@@ -29,6 +41,10 @@
 body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  transition-property: opacity, background-color, transform, filter;
+  transition-duration: 500ms;
+  transition-timing-function: ease-in-out;
+  overflow: hidden;
 }
 /*
     5. Improve media defaults

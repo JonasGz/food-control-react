@@ -1,11 +1,11 @@
 "use client";
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import "./index.scss";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import { getAuth } from "firebase/auth";
 import { RiLogoutBoxLine } from "react-icons/ri";
 import { useAuth } from "@/app/auth-config/auth-config";
+import { Transition } from "../Transition/Transition";
 
 function HamburgerMenu() {
   const auth = getAuth();
@@ -22,7 +22,7 @@ function HamburgerMenu() {
   }
 
   return (
-    <>
+    <Fragment>
       <header className="header">
         <button className="menu-toggle" onClick={toggleMenu}>
           ☰
@@ -40,28 +40,28 @@ function HamburgerMenu() {
         {!auth.currentUser ? (
           <ul>
             <li>
-              <Link href={"/"}>Home</Link>
+              <Transition href="/">Home</Transition>
             </li>
 
             <li>
-              <Link href={"/signup"}>Sign Up</Link>
+              <Transition href="/signup">Sign Up</Transition>
             </li>
           </ul>
         ) : (
           <ul>
             <li>
-              <Link href={"/dashboard"}>Dashboard</Link>
+              <Transition href="/dashboard">Dashboard</Transition>
             </li>
             <li>
-              <Link href={"/addfood"}>Add Food</Link>
+              <Transition href="/addfood">Add Food</Transition>
             </li>
             <li>
-              <Link href={"/listfood"}>List Food</Link>
+              <Transition href="/listfood">List Food</Transition>
             </li>
           </ul>
         )}
       </nav>
-    </>
+    </Fragment>
   );
 }
 

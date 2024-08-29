@@ -26,7 +26,7 @@ const Form = ({ router, type }) => {
     }
   }
 
-  function handleAction() {
+  function handleAction(event) {
     event.preventDefault();
 
     if (type == "login") {
