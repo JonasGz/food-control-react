@@ -8,25 +8,33 @@ import { Button } from "antd";
 import { CiEdit } from "react-icons/ci";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { getAuth } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { ProtectPage } from "../components/ProtectPage/ProtectPage";
+import { Loading } from "../components/Loading/Loading";
 
 export default function DashboardPage() {
   const auth = getAuth();
   const [user, setUser] = useState(null);
+  const [name, setName] = useState(null);
   const [limit, setLimit] = useState(null);
   const router = useRouter();
   const [value, setValue] = useState(0);
   const [saldo, setSaldo] = useState(null);
   const [edit, setEdit] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const sessionStorageAuth = sessionStorage.getItem("user");
-      if (!sessionStorageAuth) {
-        router.push("/");
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      if (auth.currentUser) {
+        setUser(currentUser);
+        setLoading(false);
+      } else {
+        setUser(null);
+        setLoading(false);
       }
-    }
-  }, [router]);
+    });
+    return () => unsubscribe();
+  }, [auth]);
 
   useEffect(() => {
     const localStorageLimit = localStorage.getItem("limit");
@@ -36,7 +44,7 @@ export default function DashboardPage() {
         auth.currentUser.email.charAt(0).toUpperCase() +
         auth.currentUser.email.slice(1);
       const newEmail = emailReceived.replace(/@.*/, "");
-      setUser(newEmail);
+      setName(newEmail);
     }
     if (localStorageLimit) {
       setLimit(localStorageLimit);
@@ -72,11 +80,19 @@ export default function DashboardPage() {
     setEdit(true);
   }
 
+  if (loading) {
+    return <Loading />;
+  }
+
+  if (!user) {
+    return <ProtectPage />;
+  }
+
   return (
     <>
       <div className="container-dashboard">
         <MdDashboardCustomize size={110} />
-        <h1>{user ? `Welcome ${user}!` : "Login não realizado!"}</h1>
+        <h1>{user ? `Welcome ${name}!` : "Login não realizado!"}</h1>
         <div className="data">
           <div className="limit">
             <p style={{ fontWeight: "bold", textAlign: "center" }}>LIMITE</p>

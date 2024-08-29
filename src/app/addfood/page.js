@@ -1,25 +1,34 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { GiHamburger } from "react-icons/gi";
 import { Button, Form, Input } from "antd";
 import { IoIosAdd } from "react-icons/io";
 import { IoMdTrash } from "react-icons/io";
-
 import "./page.scss";
 import { useRouter } from "next/navigation";
+import { ProtectPage } from "../components/ProtectPage/ProtectPage";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { Loading } from "../components/Loading/Loading";
 
 export default function AddFoodPage() {
+  const auth = getAuth();
   const router = useRouter();
   const [form] = Form.useForm();
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const sessionStorageAuth = sessionStorage.getItem("user");
-      if (!sessionStorageAuth) {
-        router.push("/");
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      if (auth.currentUser) {
+        setUser(currentUser);
+        setLoading(false);
+      } else {
+        setUser(null);
+        setLoading(false);
       }
-    }
-  }, [router]);
+    });
+    return () => unsubscribe();
+  }, [auth]);
 
   function handleClick(data) {
     const id = Math.random();
@@ -32,6 +41,14 @@ export default function AddFoodPage() {
 
   function clearInput() {
     form.resetFields();
+  }
+
+  if (loading) {
+    return <Loading />;
+  }
+
+  if (!user) {
+    return <ProtectPage />;
   }
 
   return (

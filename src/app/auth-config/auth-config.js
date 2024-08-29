@@ -11,6 +11,7 @@ import React from "react";
 const AuthContext = React.createContext();
 
 export function AuthProvider({ children }) {
+  const auth = getAuth();
   function signIn(email, password, router) {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
@@ -48,7 +49,7 @@ export function AuthProvider({ children }) {
   }
 
   return (
-    <AuthContext.Provider value={{ signIn, signUp, logOut }}>
+    <AuthContext.Provider value={{ signIn, signUp, logOut, auth }}>
       {children}
     </AuthContext.Provider>
   );

@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
 /*
   1. Use a more-intuitive box-sizing model.
 */
@@ -11,6 +13,7 @@
   */
 * {
   margin: 0;
+  font-family: "Roboto", sans-serif;
 }
 
 .layout {
