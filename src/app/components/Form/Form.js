@@ -3,6 +3,7 @@ import { useAuth } from "../../auth-config/auth-config";
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
 import "./Form.scss";
+import { Transition } from "../Transition/Transition";
 
 const Form = ({ router, type }) => {
   const [typePassword, setTypePassword] = useState("password");
@@ -87,26 +88,31 @@ const Form = ({ router, type }) => {
           <span style={{ fontSize: "0.8rem", textAlign: "center" }}>
             Not account?
           </span>
-          <button
-            onClick={() => router.push("/signup")}
-            type="button"
-            className="container-form__button container-form__button--disabled"
-          >
-            Sign Up
-          </button>
+          <Transition href="/signup">
+            <button
+              type="button"
+              className="container-form__button container-form__button--disabled"
+            >
+              Sign Up
+            </button>
+          </Transition>
         </div>
       ) : (
         <div className="container-form__buttons">
           <button type="submit" className="container-form__button">
             Sign Up
           </button>
-          <button
-            onClick={() => router.push("/")}
-            type="button"
-            className="container-form__button container-form__button--disabled"
-          >
-            Sign In
-          </button>
+          <span style={{ fontSize: "0.8rem", textAlign: "center" }}>
+            Have an account?
+          </span>
+          <Transition href="/">
+            <button
+              type="button"
+              className="container-form__button container-form__button--disabled"
+            >
+              Sign In
+            </button>
+          </Transition>
         </div>
       )}
     </form>

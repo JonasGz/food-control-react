@@ -7,7 +7,7 @@ import {
   signOut,
 } from "firebase/auth";
 import React from "react";
-import transitionAction from "../utils/TransitionAction";
+import transitionAction from "../utils/transitionAction/transitionAction";
 
 const AuthContext = React.createContext();
 const auth = getAuth();
