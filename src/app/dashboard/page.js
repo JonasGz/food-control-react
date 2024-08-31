@@ -2,9 +2,7 @@
 
 import "./page.scss";
 import { MdDashboardCustomize } from "react-icons/md";
-import { IoIosAdd } from "react-icons/io";
-import { FaList } from "react-icons/fa";
-import { Button } from "antd";
+import { Button } from "../components/Button/Button";
 import { CiEdit } from "react-icons/ci";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -130,24 +128,10 @@ export default function DashboardPage() {
         </div>
         <div className="container-buttons">
           <Transition href="/addfood">
-            <Button
-              type="primary"
-              size="large"
-              style={{ width: "4rem", height: "4rem" }}
-              danger
-            >
-              <IoIosAdd size={42} />
-            </Button>
+            <Button page="add" router={router} action={false} />
           </Transition>
           <Transition href="/listfood">
-            <Button
-              type="primary"
-              size="large"
-              style={{ width: "4rem", height: "4rem" }}
-              danger
-            >
-              <FaList size={26} />
-            </Button>
+            <Button page="edit" router={router} action={false} />
           </Transition>
         </div>
       </div>

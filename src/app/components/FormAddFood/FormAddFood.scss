@@ -1,0 +1,36 @@
+.container-form-add-food {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 80%;
+  max-width: 22.5rem;
+
+  &__inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  &__input {
+    padding: 0.6rem;
+    border-radius: 0.6rem;
+    border: none;
+    outline: 0.1rem solid #c2c2c2;
+    transition: ease-in-out 0.3s;
+  }
+
+  &__input:focus {
+    outline: 0.1rem solid #ff8a8a;
+  }
+
+  &__input:hover {
+    outline: 0.1rem solid #ff8a8a;
+  }
+
+  &__buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    justify-content: center;
+  }
+}
