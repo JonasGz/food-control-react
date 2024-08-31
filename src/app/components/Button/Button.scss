@@ -1,0 +1,23 @@
+.button {
+  border: none;
+  background-color: #e52323;
+  color: white;
+  padding: 1rem;
+  border-radius: 0.6rem;
+  cursor: pointer;
+  transition: ease-in-out 0.3s;
+
+  &__disabled {
+    background-color: white;
+    color: #e52323;
+    border: 0.1rem solid #e52323;
+  }
+
+  &:focus {
+    border: 0.1rem solid #e52323;
+  }
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
