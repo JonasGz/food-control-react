@@ -10,7 +10,10 @@ export const FormAddFood = ({ router }) => {
     if (target.type == "text") {
       setFood(target.value);
     } else {
-      setValue(target.value);
+      const newValue = target.value.replace(/,/g, ".");
+      if (/^[0-9.]*$/.test(newValue)) {
+        setValue(inputValue);
+      }
     }
   }
   function addFood(event) {
