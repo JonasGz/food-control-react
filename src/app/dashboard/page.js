@@ -18,7 +18,7 @@ export default function DashboardPage() {
   const [limit, setLimit] = useState(null);
   const router = useRouter();
   const [value, setValue] = useState(0);
-  const [saldo, setSaldo] = useState(null);
+  const [saldo, setSaldo] = useState(0);
   const [edit, setEdit] = useState(true);
   const [loading, setLoading] = useState(true);
 
