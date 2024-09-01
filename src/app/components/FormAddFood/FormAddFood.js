@@ -10,10 +10,7 @@ export const FormAddFood = ({ router }) => {
     if (target.type == "text") {
       setFood(target.value);
     } else {
-      const newValue = target.value.replace(/,/g, ".");
-      if (/^[0-9.]*$/.test(newValue)) {
-        setValue(inputValue);
-      }
+      setValue(target.value);
     }
   }
   function addFood(event) {
@@ -21,14 +18,17 @@ export const FormAddFood = ({ router }) => {
     const id = Math.random();
     if (food && value) {
       transitionAction("start");
-      const newFood = { food, value, id };
-      const existingFood = JSON.parse(localStorage.getItem("food")) || [];
-      const updateFood = [...existingFood, newFood];
-      localStorage.setItem("food", JSON.stringify(updateFood));
-      router.push("/listfood");
-      transitionAction("end");
-    } else {
-      console.error(error);
+      const clearValue = value.replace(/,/g, ".");
+      if (/^[0-9.]*$/.test(clearValue)) {
+        const newFood = { food, value: clearValue, id };
+        const existingFood = JSON.parse(localStorage.getItem("food")) || [];
+        const updateFood = [...existingFood, newFood];
+        localStorage.setItem("food", JSON.stringify(updateFood));
+        router.push("/listfood");
+        transitionAction("end");
+      } else {
+        console.error(error);
+      }
     }
   }
 
