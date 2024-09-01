@@ -1,9 +1,9 @@
 "use client";
 import React from "react";
-import HamburgerMenu from "./HamburgerMenu/HamburgerMenu";
+import Menu from "./Menu/Menu";
 
 function Navbar() {
-  return <HamburgerMenu />;
+  return <Menu />;
 }
 
 export default Navbar;
