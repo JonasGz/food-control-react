@@ -48,7 +48,7 @@ export const FormAddFood = ({ router }) => {
         />
         <input
           type="number"
-          inputMode="numeric"
+          inputMode="decimal"
           placeholder="50.00"
           className="container-form-add-food__input"
           onChange={onChange}
